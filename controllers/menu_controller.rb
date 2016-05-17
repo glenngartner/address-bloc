@@ -98,6 +98,7 @@ class MenuController
       system "clear"
       puts "#{selection} is not a valid input"
       entry_submenu(entry)
+    end
   end
 
 end
