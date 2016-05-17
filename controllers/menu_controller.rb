@@ -14,7 +14,8 @@ class MenuController
     puts "2 - Create an entry"
     puts "3 - Search for an entry"
     puts "4 - Import entries from a CSV"
-    puts "5 - Exit"
+    puts "5 - View Specific entry number"
+    puts "6 - Exit"
     print "Enter your selection: "
 
     selection = gets.to_i
@@ -38,6 +39,10 @@ class MenuController
       read_csv
       main_menu
     when 5
+      system "clear"
+      specific_entry
+      main_menu
+    when 6
       puts "Good-bye!"
       exit(0)
     else
@@ -99,6 +104,36 @@ class MenuController
       puts "#{selection} is not a valid input"
       entry_submenu(entry)
     end
+  end
+
+  def specific_entry
+    entries = address_book.entries
+    print "Please enter the specific menu number you want to view: "
+    input = gets.chomp.to_i
+
+    # check if the user input a number in the correct range
+      if(input <= entries.count && input > 0)
+    # if the number is in the correct range, output the entry
+        print entries[input-1]
+    # if the number is not in the correct range, tell them the range,
+      elsif (entries.count == 0)
+        puts "There are no entries yet."
+        puts "Please choose 'Create an entry', enter some data, and try again"
+        puts ""
+      else
+        puts "There is no entry ##{input}"
+        puts ""
+        if(entries.count == 1)
+          puts "There's only 1 entry, choose that one"
+          puts ""
+        else
+          puts "Choose an entry between 1 - #{entries.count}"
+          puts ""
+          system "clear"
+          specific_entry
+        end
+      end
+    # and ask them to try again
   end
 
 end
