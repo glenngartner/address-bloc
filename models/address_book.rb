@@ -46,15 +46,7 @@ class AddressBook
   end
 
   def iterative_search(name)
-    entries.each_with_index do |entry, index|
-      # puts entry.name
-      if(name == entry.name)
-        # p entries[index]
-        return entries[index]
-      end
-        # puts "debug: nothing found"
-        return nil
-    end
+    entries.find { |entry| entry.name == name}
   end
 
 end
